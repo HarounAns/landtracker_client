@@ -13,6 +13,8 @@ export interface ZillowItem {
     livabilityScore?: number;
     SK: string;
     PK: string;
+    latitude: number;
+    longitude: number;
 }
 export interface Address {
     city: string;

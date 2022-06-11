@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, UncontrolledDropdown } from "reactstrap";
+import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown } from "reactstrap";
+import { calculateCrowDistanceToTysons } from "../helpers/calculateCrowDistanceToTysons";
 import { ZillowItem } from "../types";
 
 export interface IFeedNavbarProps {
@@ -13,6 +14,7 @@ const SORT_BY_OPTIONS = {
   lotSize: 'Most Land',
   price: 'Cheapest',
   livabilityScore: 'Livability Score',
+  distance: 'Distance',
 }
 
 const FILTER_BY_OPTIONS = {
@@ -56,18 +58,22 @@ export default function FeedNavbar({ items, setItems, originalItems }: IFeedNavb
         return 0;
       });
     }
-    if (option === SORT_BY_OPTIONS.none) {
-      // sort by lot size
+    if (option === SORT_BY_OPTIONS.distance) {
+      // sort by livability score
       sortedItems = [...items].sort((a, b) => {
-        if (a.SK < b.SK) {
+        if (!a.latitude || !a.longitude) return 1;
+        if (!b.latitude || !b.longitude) return -1;
+
+        if (calculateCrowDistanceToTysons(a.latitude, a.longitude) > calculateCrowDistanceToTysons(b.latitude, b.longitude)) {
           return 1;
         }
-        if (a.SK > b.SK) {
+        if (calculateCrowDistanceToTysons(a.latitude, a.longitude) < calculateCrowDistanceToTysons(b.latitude, b.longitude)) {
           return -1;
         }
         return 0;
       });
     }
+
     if (option === SORT_BY_OPTIONS.livabilityScore) {
       // sort by livability score
       sortedItems = [...items].sort((a, b) => {
@@ -77,6 +83,20 @@ export default function FeedNavbar({ items, setItems, originalItems }: IFeedNavb
           return 1;
         }
         if (a.livabilityScore > b.livabilityScore) {
+          return -1;
+        }
+        return 0;
+      });
+    }
+
+    // sort by timestamp
+    if (option === SORT_BY_OPTIONS.none) {
+      // sort by lot size
+      sortedItems = [...items].sort((a, b) => {
+        if (a.SK < b.SK) {
+          return 1;
+        }
+        if (a.SK > b.SK) {
           return -1;
         }
         return 0;
@@ -139,6 +159,10 @@ export default function FeedNavbar({ items, setItems, originalItems }: IFeedNavb
                 <DropdownItem divider />
                 <DropdownItem onClick={() => setOption(SORT_BY_OPTIONS.livabilityScore)}>
                   Livability Score
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={() => setOption(SORT_BY_OPTIONS.distance)}>
+                  Nearest
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

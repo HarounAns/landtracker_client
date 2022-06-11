@@ -1,6 +1,5 @@
 import Feed from './Components/Feed';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'reactstrap';
 
 
 function App() {

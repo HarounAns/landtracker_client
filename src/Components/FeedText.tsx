@@ -1,4 +1,5 @@
 import { ZillowItem } from '../types';
+import DistanceFromTysonsBadge from './DistanceFromTysonsBadge';
 import { LivabilityScoreBadge } from './LivabilityScoreBadge';
 
 export interface IFeedTextProps {
@@ -19,26 +20,40 @@ export function FeedText({ item }: IFeedTextProps) {
         bedrooms,
         bathrooms,
         livingArea,
-        livabilityScore
+        livabilityScore,
+        latitude,
+        longitude
     } = item;
     return (
         <div style={styles.container}>
-            <span>
+            <div>
                 <strong>{lotSize}</strong> ${price.toLocaleString()}
-                <span style={{ float: 'right', margin: '5px' }}>
-                    <LivabilityScoreBadge 
-                        livabilityScore={livabilityScore} 
+                <div>{`${bedrooms || '--'}  bd | ${bathrooms || '--'} ba  | ${livingArea || '--'} sqft`}</div>
+                <div> {`${streetAddress}, ${city}, ${state}, ${zipcode}`}</div>
+                <a style={{ textDecoration: 'none' }} target="_blank" rel="noreferrer" href={`https://www.zillow.com/${hdpUrl}`}>
+                    View on Zillow
+                </a>
+            </div>
+            <div style={{ margin: '5px' }}>
+                <div style={{ display: 'flex', flexDirection: 'row-reverse', }}>
+                    <LivabilityScoreBadge
+                        livabilityScore={livabilityScore}
                         state={state}
                         city={city}
                         street={streetAddress}
                     />
-                </span>
-            </span>
-            <div>{`${bedrooms || '--'}  bd | ${bathrooms || '--'} ba  | ${livingArea || '--'} sqft`}</div>
-            <div> {`${streetAddress}, ${city}, ${state}, ${zipcode}`}</div>
-            <a style={{ textDecoration: 'none' }} target="_blank" rel="noreferrer" href={`https://www.zillow.com/${hdpUrl}`}>
-                View on Zillow
-            </a>
+                </div>
+                <div style={{ marginTop: '5px' }}>
+                    <DistanceFromTysonsBadge
+                        lat={latitude}
+                        long={longitude}
+                        streetAddress={streetAddress}
+                        city={city}
+                        state={state}
+                        zipcode={zipcode}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
@@ -47,6 +62,9 @@ const styles = {
     container: {
         backgroundColor: '#111',
         minHeight: '100px',
-        border: '1px solid #000'
+        border: '1px solid #000',
+        display: 'flex',
+        flexDirection: 'row' as const,
+        justifyContent: 'space-between'
     }
 }

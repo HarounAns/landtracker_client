@@ -1,5 +1,3 @@
-import { Badge } from 'reactstrap';
-
 export interface ILivabilityScoreBadgeProps {
 	livabilityScore?: number;
 	city?: string;
@@ -60,7 +58,6 @@ const styles = {
 		fontSize: '14px',
 		display: 'flex',
 		textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-		alignItems: 'center' as const,
 		justifyContent: 'center' as const,
 	}
 }
