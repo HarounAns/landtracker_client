@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FeedPost } from './FeedPost';
-import { Button, Container, Spinner } from 'reactstrap';
+import { Container, Spinner } from 'reactstrap';
 import { GetUserFeedApiResponse, NextKey, ZillowItem } from '../types';
 import axios from 'axios';
 import { LANDTRACKER_API_URL, USERNAME } from '../config';

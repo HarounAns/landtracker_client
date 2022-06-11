@@ -19,7 +19,7 @@ export function FeedPost({ item }: IFeedPostProps) {
     return (
         <div style={{ marginBottom: "50px" }}>
             <FeedHeader createdTs={createdTs} />
-            {photos?.length ? <FeedPostCarousel photos={photos} /> : <img src={NO_IMAGE_AVAILABLE_URL} />}
+            {photos?.length ? <FeedPostCarousel photos={photos} /> : <img src={NO_IMAGE_AVAILABLE_URL} alt="Not available" />}
             <FeedText item={item} />
         </div>
     );
