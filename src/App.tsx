@@ -1,7 +1,7 @@
 import Feed from './Components/Feed';
 import InactiveFeed from './Components/InactiveFeed';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 

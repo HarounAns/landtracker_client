@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, NavLink, NavItem } from "reactstrap";
 import { calculateCrowDistanceToTysons } from "../helpers/calculateCrowDistanceToTysons";
 import { ZillowItem } from "../types";
-import { useParams } from "react-router-dom";
 
 
 export interface IFeedNavbarProps {
