@@ -36,6 +36,8 @@ export default function DistanceFromTysonsBadge({
     state,
     zipcode
 }: IDistanceFromTysonsBadgeProps) {
+    if (!lat || !long) return null;
+
     const distance = calculateCrowDistanceToTysons(lat, long).toFixed(1);
     const { backgroundColor, color } = _getColor(parseFloat(distance));
     const googleMapsURL = `https://www.google.com/maps/dir/${streetAddress.replace(/\s/g, '+')},+${city.replace(/\s/g, '+')},+${state}+${zipcode}/Tysons+Corner+Center,+1961+Chain+Bridge+Rd,+Tysons,+VA+22102/`;

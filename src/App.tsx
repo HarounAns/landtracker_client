@@ -1,5 +1,8 @@
 import Feed from './Components/Feed';
+import InactiveFeed from './Components/InactiveFeed';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+
 
 
 function App() {
@@ -9,7 +12,12 @@ function App() {
       color: 'white',
       fontFamily: "Arial, Helvetica, sans-serif"
     }}>
-      <Feed />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Feed />} />
+          <Route path="/inactive" element={<InactiveFeed />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

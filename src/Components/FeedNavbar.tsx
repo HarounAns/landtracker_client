@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown } from "reactstrap";
+import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarToggler, UncontrolledDropdown, NavLink, NavItem } from "reactstrap";
 import { calculateCrowDistanceToTysons } from "../helpers/calculateCrowDistanceToTysons";
 import { ZillowItem } from "../types";
+import { useParams } from "react-router-dom";
+
 
 export interface IFeedNavbarProps {
   setItems: Function;
   items: ZillowItem[];
   originalItems: ZillowItem[];
+  activeFeed: boolean;
 }
 
 const SORT_BY_OPTIONS = {
@@ -23,7 +26,7 @@ const FILTER_BY_OPTIONS = {
   MD: 'Maryland',
 }
 
-export default function FeedNavbar({ items, setItems, originalItems }: IFeedNavbarProps) {
+export default function FeedNavbar({ items, setItems, originalItems, activeFeed }: IFeedNavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [sortByOption, setSortByOption] = useState(SORT_BY_OPTIONS.none);
   const [filterByOption, setFilterByOption] = useState(FILTER_BY_OPTIONS.none);
@@ -189,6 +192,14 @@ export default function FeedNavbar({ items, setItems, originalItems }: IFeedNavb
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
+
+            <NavItem>
+              {activeFeed ?
+                (<NavLink href="/inactive">See Inactive</NavLink>)
+                :
+                (<NavLink href="/">See Active</NavLink>)
+              }
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>

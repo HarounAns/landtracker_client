@@ -87,7 +87,9 @@ const Feed: React.FunctionComponent = () => {
       <FeedNavbar
         originalItems={originalItems}
         items={items}
-        setItems={setItems} />
+        setItems={setItems}
+        activeFeed={true}
+      />
       {items.map(item => <FeedPost item={item} />)}
       {loadingNextPage && (
         <Container style={{ textAlign: 'center' }}>
