@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "LandTracker",
+  "name": "Find houses with land near you!",
   "icons": [
     {
       "src": "favicon.ico",
