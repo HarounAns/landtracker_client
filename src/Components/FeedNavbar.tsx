@@ -59,7 +59,7 @@ export default function FeedNavbar({ items, setItems, originalItems }: IFeedNavb
       });
     }
     if (option === SORT_BY_OPTIONS.distance) {
-      // sort by livability score
+      // sort by distance to tysons
       sortedItems = [...items].sort((a, b) => {
         if (!a.latitude || !a.longitude) return 1;
         if (!b.latitude || !b.longitude) return -1;
