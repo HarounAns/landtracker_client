@@ -1,5 +1,6 @@
 import { ZillowItem } from '../types';
 import DistanceFromTysonsBadge from './DistanceFromTysonsBadge';
+import { HomeStatusMarker } from './HomeStatusMarker';
 import { LivabilityScoreBadge } from './LivabilityScoreBadge';
 
 export interface IFeedTextProps {
@@ -22,7 +23,8 @@ export function FeedText({ item }: IFeedTextProps) {
         livingArea,
         livabilityScore,
         latitude,
-        longitude
+        longitude,
+        homeStatus
     } = item;
     return (
         <div style={styles.container}>
@@ -30,6 +32,7 @@ export function FeedText({ item }: IFeedTextProps) {
                 <strong>{lotSize}</strong> ${price.toLocaleString()}
                 <div>{`${bedrooms || '--'}  bd | ${bathrooms || '--'} ba  | ${livingArea || '--'} sqft`}</div>
                 <div> {`${streetAddress}, ${city}, ${state}, ${zipcode}`}</div>
+                <HomeStatusMarker homeStatus={homeStatus} />
                 <a style={{ textDecoration: 'none' }} target="_blank" rel="noreferrer" href={`https://www.zillow.com/${hdpUrl}`}>
                     View on Zillow
                 </a>
