@@ -1,12 +1,14 @@
 import { ZillowItem } from '../types';
 import DistanceFromTysonsBadge from './DistanceFromTysonsBadge';
+import { HomeStatusMarker } from './HomeStatusMarker';
 import { LivabilityScoreBadge } from './LivabilityScoreBadge';
 
 export interface IFeedTextProps {
     item: ZillowItem;
+    activeFeed: boolean;
 }
 
-export function FeedText({ item }: IFeedTextProps) {
+export function FeedText({ item, activeFeed }: IFeedTextProps) {
     const {
         lotSize,
         price,
@@ -22,7 +24,9 @@ export function FeedText({ item }: IFeedTextProps) {
         livingArea,
         livabilityScore,
         latitude,
-        longitude
+        longitude,
+        homeStatus,
+        onMarketTimeDays
     } = item;
     return (
         <div style={styles.container}>
@@ -30,6 +34,7 @@ export function FeedText({ item }: IFeedTextProps) {
                 <strong>{lotSize}</strong> ${price.toLocaleString()}
                 <div>{`${bedrooms || '--'}  bd | ${bathrooms || '--'} ba  | ${livingArea || '--'} sqft`}</div>
                 <div> {`${streetAddress}, ${city}, ${state}, ${zipcode}`}</div>
+                {!activeFeed && <HomeStatusMarker homeStatus={homeStatus} onMarketTimeDays={onMarketTimeDays}/>}
                 <a style={{ textDecoration: 'none' }} target="_blank" rel="noreferrer" href={`https://www.zillow.com/${hdpUrl}`}>
                     View on Zillow
                 </a>
