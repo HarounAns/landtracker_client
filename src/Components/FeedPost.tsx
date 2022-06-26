@@ -8,9 +8,10 @@ const NO_IMAGE_AVAILABLE_URL = 'https://panthertech.fiu.edu/scs/extensions/SC/Ma
 
 export interface IFeedPostProps {
     item: ZillowItem;
+    activeFeed: boolean;
 }
 
-export function FeedPost({ item }: IFeedPostProps) {
+export function FeedPost({ item, activeFeed }: IFeedPostProps) {
     const {
         photos,
         SK: createdTs
@@ -20,7 +21,7 @@ export function FeedPost({ item }: IFeedPostProps) {
         <div style={{ marginBottom: "50px" }}>
             <FeedHeader createdTs={createdTs} />
             {photos?.length ? <FeedPostCarousel photos={photos} /> : <img src={NO_IMAGE_AVAILABLE_URL} alt="Not available" />}
-            <FeedText item={item} />
+            <FeedText item={item} activeFeed={activeFeed}/>
         </div>
     );
 }

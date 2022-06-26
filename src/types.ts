@@ -22,6 +22,7 @@ export interface ZillowItem {
     | "RECENTLY_SOLD"
     | "SOLD"
     | "FOR_SALE";
+  onMarketTimeDays?: number;
 }
 export interface Address {
   city: string;

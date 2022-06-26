@@ -90,7 +90,7 @@ const InactiveFeed: React.FunctionComponent = () => {
                 setItems={setItems}
                 activeFeed={false}
             />
-            {items.map(item => <FeedPost item={item} />)}
+            {items.map(item => <FeedPost item={item} activeFeed={false} />)}
             {loadingNextPage && (
                 <Container style={{ textAlign: 'center' }}>
                     <Spinner color='light' size='sm' />

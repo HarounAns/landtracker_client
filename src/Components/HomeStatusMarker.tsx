@@ -32,9 +32,12 @@ export interface IHomeStatusMarkerProps {
     | "RECENTLY_SOLD"
     | "SOLD"
     | "FOR_SALE";
+    onMarketTimeDays?: number;
 }
 
-export function HomeStatusMarker({ homeStatus }: IHomeStatusMarkerProps) {
+const HAS_OFFER_HOME_STATUSES = ["UNDER_CONTRACT", "PENDING", "RECENTLY_SOLD", "SOLD"];
+
+export function HomeStatusMarker({ homeStatus, onMarketTimeDays }: IHomeStatusMarkerProps) {
     if (!homeStatus) return null;
     if (!(homeStatus in HOME_STATUSES)) return null;
 
@@ -43,6 +46,14 @@ export function HomeStatusMarker({ homeStatus }: IHomeStatusMarkerProps) {
         <div>
             <span style={{ ...styles.dot, backgroundColor }} />
             <span>{' ' + message}</span>
+            {
+                Boolean(HAS_OFFER_HOME_STATUSES.includes(homeStatus)) && 
+                Number.isInteger(onMarketTimeDays) && onMarketTimeDays !== undefined && (
+                    <span style={styles.onMarketLabel}>
+                        {`  - ON MARKET ${onMarketTimeDays} DAYS${onMarketTimeDays <= 5 ? ' 🔥' : ''}`}
+                    </span>
+                )
+            }
         </div>
     );
 }
@@ -54,5 +65,8 @@ const styles = {
         backgroundColor: '#bbb',
         borderRadius: '50%',
         display: 'inline-block'
+    },
+    onMarketLabel: {
+        fontSize: '11px',
     }
 }
